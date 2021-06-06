@@ -1,0 +1,22 @@
+﻿<Window x:Class="ServiceCenter.Check.CheckWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ServiceCenter.Check"
+        mc:Ignorable="d"
+         Height="300" Width="400">
+    <Grid>
+        <Label Content="Введите данные для входа" FontSize="16" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Логин" FontSize="14" HorizontalAlignment="Left" Margin="99,60,0,0" VerticalAlignment="Top"/>
+        <Label Content="Пароль" FontSize="14" HorizontalAlignment="Left" Margin="90,105,0,0" VerticalAlignment="Top"/>
+        <Button Click="tb_next_Click" Content="Продолжить" Name="tb_next" FontSize="14" HorizontalAlignment="Left" Margin="40,175,0,0" VerticalAlignment="Top" Width="95" Height="40"/>
+        <Button Click="tb_exit_Click" Content="Выход" Name="tb_exit"  FontSize="14" HorizontalAlignment="Left" Margin="260,175,0,0" VerticalAlignment="Top" Width="95" Height="40"/>
+        <TextBox x:Name="loginTextBox" HorizontalAlignment="Left"  FontSize="14" Height="25" Margin="170,60,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="passwordTextBox" HorizontalAlignment="Left" FontSize="14" Height="25" Margin="170,105,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <Button Content="Опасно!" Name="btn_1" Click="btn_1_Click" HorizontalAlignment="Left" Margin="40,239,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Ты уверен?" Name="btn_2" Click="btn_2_Click" Visibility="Hidden" HorizontalAlignment="Left" Margin="155,239,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Регистрация" Name="btn_3" Click="btn_3_Click" Visibility="Hidden" HorizontalAlignment="Left" Margin="260,239,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>

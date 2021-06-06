@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e87b54ab924c4893bb43b200395cdebb" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Employees" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Orders" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Position" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Remont_Models" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Shop" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Spare_parts" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Types_of_faults" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Employees_Position" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Orders_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Orders_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Orders_Types_of_faults" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Types_of_faults_Remont_Models" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Types_of_faults_Spare_parts" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Types_of_faults_Spare_parts1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Types_of_faults_Spare_parts2" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

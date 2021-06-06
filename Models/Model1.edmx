@@ -1,0 +1,624 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id_empl" />
+          </Key>
+          <Property Name="Id_empl" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Age" Type="nvarchar" MaxLength="10" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="1" />
+          <Property Name="Address" Type="nvarchar" MaxLength="30" />
+          <Property Name="Phone_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Passport_data" Type="nvarchar" MaxLength="10" />
+          <Property Name="Id_position" Type="int" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id_orders" />
+          </Key>
+          <Property Name="Id_orders" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data_Zakaza" Type="date" />
+          <Property Name="Data_of_vozvrata" Type="date" />
+          <Property Name="FIO_Customers" Type="nvarchar" MaxLength="100" />
+          <Property Name="Serial_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="id_Types_of_faults" Type="int" />
+          <Property Name="id_shop" Type="int" />
+          <Property Name="Otmetka_o_garanti" Type="nvarchar" MaxLength="50" />
+          <Property Name="Srok_garanti_remonta" Type="date" />
+          <Property Name="Price" Type="nvarchar" MaxLength="50" />
+          <Property Name="id_empl" Type="int" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="Id_position" />
+          </Key>
+          <Property Name="Id_position" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PositionName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Salary" Type="nvarchar" MaxLength="50" />
+          <Property Name="Needs" Type="nvarchar" MaxLength="50" />
+          <Property Name="Requirements" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Remont_Models">
+          <Key>
+            <PropertyRef Name="Id_Models" />
+          </Key>
+          <Property Name="Id_Models" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Manufacturer" Type="nvarchar" MaxLength="50" />
+          <Property Name="Characteristics" Type="nvarchar" MaxLength="50" />
+          <Property Name="Features" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Shop">
+          <Key>
+            <PropertyRef Name="Id_shop" />
+          </Key>
+          <Property Name="Id_shop" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone_number" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Spare_parts">
+          <Key>
+            <PropertyRef Name="Id_spare_parts" />
+          </Key>
+          <Property Name="Id_spare_parts" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Functions" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Types_of_faults">
+          <Key>
+            <PropertyRef Name="Id_types" />
+          </Key>
+          <Property Name="Id_types" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_models" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="Simptoms" Type="nvarchar" MaxLength="50" />
+          <Property Name="Metodi_remonta" Type="nvarchar" MaxLength="50" />
+          <Property Name="id_zapchasti_1" Type="int" />
+          <Property Name="id_zapchasti_2" Type="int" />
+          <Property Name="id_zapchasti_3" Type="int" />
+          <Property Name="Price_work" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Employees_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="Id_position" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Id_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_empl" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_empl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Shop">
+          <End Role="Shop" Type="Self.Shop" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="Id_shop" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Types_of_faults">
+          <End Role="Types_of_faults" Type="Self.Types_of_faults" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types_of_faults">
+              <PropertyRef Name="Id_types" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_Types_of_faults" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Types_of_faults_Remont_Models">
+          <End Role="Remont_Models" Type="Self.Remont_Models" Multiplicity="0..1" />
+          <End Role="Types_of_faults" Type="Self.Types_of_faults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Remont_Models">
+              <PropertyRef Name="Id_Models" />
+            </Principal>
+            <Dependent Role="Types_of_faults">
+              <PropertyRef Name="Id_models" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Types_of_faults_Spare_parts">
+          <End Role="Spare_parts" Type="Self.Spare_parts" Multiplicity="0..1" />
+          <End Role="Types_of_faults" Type="Self.Types_of_faults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spare_parts">
+              <PropertyRef Name="Id_spare_parts" />
+            </Principal>
+            <Dependent Role="Types_of_faults">
+              <PropertyRef Name="id_zapchasti_1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Types_of_faults_Spare_parts1">
+          <End Role="Spare_parts" Type="Self.Spare_parts" Multiplicity="0..1" />
+          <End Role="Types_of_faults" Type="Self.Types_of_faults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spare_parts">
+              <PropertyRef Name="Id_spare_parts" />
+            </Principal>
+            <Dependent Role="Types_of_faults">
+              <PropertyRef Name="id_zapchasti_2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Types_of_faults_Spare_parts2">
+          <End Role="Spare_parts" Type="Self.Spare_parts" Multiplicity="0..1" />
+          <End Role="Types_of_faults" Type="Self.Types_of_faults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spare_parts">
+              <PropertyRef Name="Id_spare_parts" />
+            </Principal>
+            <Dependent Role="Types_of_faults">
+              <PropertyRef Name="id_zapchasti_3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Remont_Models" EntityType="Self.Remont_Models" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shop" EntityType="Self.Shop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Spare_parts" EntityType="Self.Spare_parts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Types_of_faults" EntityType="Self.Types_of_faults" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employees_Position" Association="Self.FK_Employees_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Employees" Association="Self.FK_Orders_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Shop" Association="Self.FK_Orders_Shop">
+            <End Role="Shop" EntitySet="Shop" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Types_of_faults" Association="Self.FK_Orders_Types_of_faults">
+            <End Role="Types_of_faults" EntitySet="Types_of_faults" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Types_of_faults_Remont_Models" Association="Self.FK_Types_of_faults_Remont_Models">
+            <End Role="Remont_Models" EntitySet="Remont_Models" />
+            <End Role="Types_of_faults" EntitySet="Types_of_faults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Types_of_faults_Spare_parts" Association="Self.FK_Types_of_faults_Spare_parts">
+            <End Role="Spare_parts" EntitySet="Spare_parts" />
+            <End Role="Types_of_faults" EntitySet="Types_of_faults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Types_of_faults_Spare_parts1" Association="Self.FK_Types_of_faults_Spare_parts1">
+            <End Role="Spare_parts" EntitySet="Spare_parts" />
+            <End Role="Types_of_faults" EntitySet="Types_of_faults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Types_of_faults_Spare_parts2" Association="Self.FK_Types_of_faults_Spare_parts2">
+            <End Role="Spare_parts" EntitySet="Spare_parts" />
+            <End Role="Types_of_faults" EntitySet="Types_of_faults" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id_empl" />
+          </Key>
+          <Property Name="Id_empl" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Passport_data" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Id_position" Type="Int32" />
+          <NavigationProperty Name="Position" Relationship="Self.FK_Employees_Position" FromRole="Employees" ToRole="Position" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Employees" FromRole="Employees" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id_orders" />
+          </Key>
+          <Property Name="Id_orders" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data_Zakaza" Type="DateTime" Precision="0" />
+          <Property Name="Data_of_vozvrata" Type="DateTime" Precision="0" />
+          <Property Name="FIO_Customers" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Serial_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="id_Types_of_faults" Type="Int32" />
+          <Property Name="id_shop" Type="Int32" />
+          <Property Name="Otmetka_o_garanti" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Srok_garanti_remonta" Type="DateTime" Precision="0" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="id_empl" Type="Int32" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Orders_Employees" FromRole="Orders" ToRole="Employees" />
+          <NavigationProperty Name="Shop" Relationship="Self.FK_Orders_Shop" FromRole="Orders" ToRole="Shop" />
+          <NavigationProperty Name="Types_of_faults" Relationship="Self.FK_Orders_Types_of_faults" FromRole="Orders" ToRole="Types_of_faults" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="Id_position" />
+          </Key>
+          <Property Name="Id_position" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PositionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Needs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Requirements" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Position" FromRole="Position" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Remont_Models">
+          <Key>
+            <PropertyRef Name="Id_Models" />
+          </Key>
+          <Property Name="Id_Models" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Manufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Characteristics" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Features" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Types_of_faults" Relationship="Self.FK_Types_of_faults_Remont_Models" FromRole="Remont_Models" ToRole="Types_of_faults" />
+        </EntityType>
+        <EntityType Name="Shop">
+          <Key>
+            <PropertyRef Name="Id_shop" />
+          </Key>
+          <Property Name="Id_shop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Shop" FromRole="Shop" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Spare_parts">
+          <Key>
+            <PropertyRef Name="Id_spare_parts" />
+          </Key>
+          <Property Name="Id_spare_parts" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Functions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Types_of_faults" Relationship="Self.FK_Types_of_faults_Spare_parts" FromRole="Spare_parts" ToRole="Types_of_faults" />
+          <NavigationProperty Name="Types_of_faults1" Relationship="Self.FK_Types_of_faults_Spare_parts1" FromRole="Spare_parts" ToRole="Types_of_faults" />
+          <NavigationProperty Name="Types_of_faults2" Relationship="Self.FK_Types_of_faults_Spare_parts2" FromRole="Spare_parts" ToRole="Types_of_faults" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Types_of_faults">
+          <Key>
+            <PropertyRef Name="Id_types" />
+          </Key>
+          <Property Name="Id_types" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_models" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Simptoms" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Metodi_remonta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="id_zapchasti_1" Type="Int32" />
+          <Property Name="id_zapchasti_2" Type="Int32" />
+          <Property Name="id_zapchasti_3" Type="Int32" />
+          <Property Name="Price_work" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Types_of_faults" FromRole="Types_of_faults" ToRole="Orders" />
+          <NavigationProperty Name="Remont_Models" Relationship="Self.FK_Types_of_faults_Remont_Models" FromRole="Types_of_faults" ToRole="Remont_Models" />
+          <NavigationProperty Name="Spare_parts" Relationship="Self.FK_Types_of_faults_Spare_parts" FromRole="Types_of_faults" ToRole="Spare_parts" />
+          <NavigationProperty Name="Spare_parts1" Relationship="Self.FK_Types_of_faults_Spare_parts1" FromRole="Types_of_faults" ToRole="Spare_parts" />
+          <NavigationProperty Name="Spare_parts2" Relationship="Self.FK_Types_of_faults_Spare_parts2" FromRole="Types_of_faults" ToRole="Spare_parts" />
+        </EntityType>
+        <Association Name="FK_Employees_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="Id_position" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Id_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_empl" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_empl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Shop">
+          <End Role="Shop" Type="Self.Shop" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="Id_shop" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Types_of_faults">
+          <End Role="Types_of_faults" Type="Self.Types_of_faults" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types_of_faults">
+              <PropertyRef Name="Id_types" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_Types_of_faults" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Types_of_faults_Remont_Models">
+          <End Role="Remont_Models" Type="Self.Remont_Models" Multiplicity="0..1" />
+          <End Role="Types_of_faults" Type="Self.Types_of_faults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Remont_Models">
+              <PropertyRef Name="Id_Models" />
+            </Principal>
+            <Dependent Role="Types_of_faults">
+              <PropertyRef Name="Id_models" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Types_of_faults_Spare_parts">
+          <End Role="Spare_parts" Type="Self.Spare_parts" Multiplicity="0..1" />
+          <End Role="Types_of_faults" Type="Self.Types_of_faults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spare_parts">
+              <PropertyRef Name="Id_spare_parts" />
+            </Principal>
+            <Dependent Role="Types_of_faults">
+              <PropertyRef Name="id_zapchasti_1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Types_of_faults_Spare_parts1">
+          <End Role="Spare_parts" Type="Self.Spare_parts" Multiplicity="0..1" />
+          <End Role="Types_of_faults" Type="Self.Types_of_faults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spare_parts">
+              <PropertyRef Name="Id_spare_parts" />
+            </Principal>
+            <Dependent Role="Types_of_faults">
+              <PropertyRef Name="id_zapchasti_2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Types_of_faults_Spare_parts2">
+          <End Role="Spare_parts" Type="Self.Spare_parts" Multiplicity="0..1" />
+          <End Role="Types_of_faults" Type="Self.Types_of_faults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spare_parts">
+              <PropertyRef Name="Id_spare_parts" />
+            </Principal>
+            <Dependent Role="Types_of_faults">
+              <PropertyRef Name="id_zapchasti_3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Service_centerEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="Position" EntityType="Self.Position" />
+          <EntitySet Name="Remont_Models" EntityType="Self.Remont_Models" />
+          <EntitySet Name="Shop" EntityType="Self.Shop" />
+          <EntitySet Name="Spare_parts" EntityType="Self.Spare_parts" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Types_of_faults" EntityType="Self.Types_of_faults" />
+          <AssociationSet Name="FK_Employees_Position" Association="Self.FK_Employees_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Employees" Association="Self.FK_Orders_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Shop" Association="Self.FK_Orders_Shop">
+            <End Role="Shop" EntitySet="Shop" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Types_of_faults" Association="Self.FK_Orders_Types_of_faults">
+            <End Role="Types_of_faults" EntitySet="Types_of_faults" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Types_of_faults_Remont_Models" Association="Self.FK_Types_of_faults_Remont_Models">
+            <End Role="Remont_Models" EntitySet="Remont_Models" />
+            <End Role="Types_of_faults" EntitySet="Types_of_faults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Types_of_faults_Spare_parts" Association="Self.FK_Types_of_faults_Spare_parts">
+            <End Role="Spare_parts" EntitySet="Spare_parts" />
+            <End Role="Types_of_faults" EntitySet="Types_of_faults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Types_of_faults_Spare_parts1" Association="Self.FK_Types_of_faults_Spare_parts1">
+            <End Role="Spare_parts" EntitySet="Spare_parts" />
+            <End Role="Types_of_faults" EntitySet="Types_of_faults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Types_of_faults_Spare_parts2" Association="Self.FK_Types_of_faults_Spare_parts2">
+            <End Role="Spare_parts" EntitySet="Spare_parts" />
+            <End Role="Types_of_faults" EntitySet="Types_of_faults" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Service_centerEntities1">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="Model.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Id_empl" ColumnName="Id_empl" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone_number" ColumnName="Phone_number" />
+                <ScalarProperty Name="Passport_data" ColumnName="Passport_data" />
+                <ScalarProperty Name="Id_position" ColumnName="Id_position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="Model.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Id_orders" ColumnName="Id_orders" />
+                <ScalarProperty Name="Data_Zakaza" ColumnName="Data_Zakaza" />
+                <ScalarProperty Name="Data_of_vozvrata" ColumnName="Data_of_vozvrata" />
+                <ScalarProperty Name="FIO_Customers" ColumnName="FIO_Customers" />
+                <ScalarProperty Name="Serial_number" ColumnName="Serial_number" />
+                <ScalarProperty Name="id_Types_of_faults" ColumnName="id_Types_of_faults" />
+                <ScalarProperty Name="id_shop" ColumnName="id_shop" />
+                <ScalarProperty Name="Otmetka_o_garanti" ColumnName="Otmetka_o_garanti" />
+                <ScalarProperty Name="Srok_garanti_remonta" ColumnName="Srok_garanti_remonta" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="id_empl" ColumnName="id_empl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Position">
+            <EntityTypeMapping TypeName="Model.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="Id_position" ColumnName="Id_position" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Needs" ColumnName="Needs" />
+                <ScalarProperty Name="Requirements" ColumnName="Requirements" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Remont_Models">
+            <EntityTypeMapping TypeName="Model.Remont_Models">
+              <MappingFragment StoreEntitySet="Remont_Models">
+                <ScalarProperty Name="Id_Models" ColumnName="Id_Models" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Characteristics" ColumnName="Characteristics" />
+                <ScalarProperty Name="Features" ColumnName="Features" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shop">
+            <EntityTypeMapping TypeName="Model.Shop">
+              <MappingFragment StoreEntitySet="Shop">
+                <ScalarProperty Name="Id_shop" ColumnName="Id_shop" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone_number" ColumnName="Phone_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Spare_parts">
+            <EntityTypeMapping TypeName="Model.Spare_parts">
+              <MappingFragment StoreEntitySet="Spare_parts">
+                <ScalarProperty Name="Id_spare_parts" ColumnName="Id_spare_parts" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Functions" ColumnName="Functions" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types_of_faults">
+            <EntityTypeMapping TypeName="Model.Types_of_faults">
+              <MappingFragment StoreEntitySet="Types_of_faults">
+                <ScalarProperty Name="Id_types" ColumnName="Id_types" />
+                <ScalarProperty Name="Id_models" ColumnName="Id_models" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Simptoms" ColumnName="Simptoms" />
+                <ScalarProperty Name="Metodi_remonta" ColumnName="Metodi_remonta" />
+                <ScalarProperty Name="id_zapchasti_1" ColumnName="id_zapchasti_1" />
+                <ScalarProperty Name="id_zapchasti_2" ColumnName="id_zapchasti_2" />
+                <ScalarProperty Name="id_zapchasti_3" ColumnName="id_zapchasti_3" />
+                <ScalarProperty Name="Price_work" ColumnName="Price_work" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

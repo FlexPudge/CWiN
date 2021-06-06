@@ -1,0 +1,150 @@
+﻿<Window x:Class="ServiceCenter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ServiceCenter"
+        mc:Ignorable="d"
+        Title=""
+        Height="520"
+        Width="850">
+    <Window.Resources>
+    </Window.Resources>
+    <Grid Background="Bisque">
+
+
+        <StackPanel 
+            x:Name="st"
+                     HorizontalAlignment="Left"
+                     Height="490"
+                     VerticalAlignment="Top"
+                     Width="160"
+                     Margin="0,0,0,-1"
+                     Loaded="StackPanel_Loaded">
+            <Image Height="50"
+                   Source="Resourses/soder.png"
+                   Width="50"
+                   HorizontalAlignment="Left" />
+            <Label FontSize="16"
+                   Content="Меню"
+                   Margin="55,-50,25,0"
+                   FontWeight="Bold"
+                   Height="34" />
+            <StackPanel.Background>
+                <SolidColorBrush x:Name="MyAnimatedBrush" 
+                                 Color="Aqua"
+                                />
+                                    
+            </StackPanel.Background>
+
+        </StackPanel >
+
+        <Image  Name="img"
+                HorizontalAlignment="Left"
+                Height="135"
+                Margin="344,60,0,294"
+                VerticalAlignment="Center"
+                Width="140"
+                Source="Resourses/Sevice.png" />
+        <Label  Name="lb"
+                Grid.Column="1"
+                Content="Aboba Service"
+                FontSize="22"
+                HorizontalAlignment="Center"
+                Margin="250,216,257,224"
+                VerticalAlignment="Center"
+                Width="175"
+                Height="49" />
+
+        <Button Click="btn_empl_Click"
+                x:Name="btn_empl"
+                FontSize="14"
+                Content="Сотрудники"
+                HorizontalAlignment="Left"
+                Margin="25,60,0,0"
+                VerticalAlignment="Top"
+                Width="115"
+                Height="35"
+                FontWeight="Bold" />
+        <Button Click="btn_posit_Click"
+                x:Name="btn_posit"
+                FontSize="14"
+                Content="Должности"
+                HorizontalAlignment="Left"
+                Margin="25,110,0,0"
+                VerticalAlignment="Top"
+                Width="115"
+                Height="35"
+                FontWeight="Bold" />
+        <Button Click="btn_spare_Click"
+                x:Name="btn_spare"
+                FontSize="14"
+                Content="Запчасти"
+                HorizontalAlignment="Left"
+                Margin="25,160,0,0"
+                VerticalAlignment="Top"
+                Width="115"
+                Height="35"
+                FontWeight="Bold" />
+        <Button Click="btn_rem_model_Click"
+                x:Name="btn_rem_model"
+                FontSize="13"
+                HorizontalAlignment="Left"
+                Margin="25,260,0,0"
+                VerticalAlignment="Top"
+                Width="115"
+                Height="45"
+                FontWeight="Bold">
+            <TextBlock TextAlignment="Center"> Ремонтируемые<LineBreak /> модели</TextBlock>
+        </Button>
+        <Button Click="btn_type_faul_Click"
+                x:Name="btn_type_faul"
+                FontSize="13"
+                HorizontalAlignment="Left"
+                Margin="25,380,0,0"
+                VerticalAlignment="Top"
+                Width="115"
+                Height="45"
+                FontWeight="Bold">
+            <TextBlock TextAlignment="Center"> Виды<LineBreak />Неисправностей</TextBlock>
+        </Button>
+        <Button Click="btn_ops_shop_Click"
+                x:Name="btn_ops_shop"
+                FontSize="13"
+                HorizontalAlignment="Left"
+                Margin="25,320,0,0"
+                VerticalAlignment="Top"
+                Width="115"
+                Height="45"
+                FontWeight="Bold">
+            <TextBlock TextAlignment="Center"> Обслуживаемые<LineBreak />Магазины</TextBlock>
+        </Button>
+        <Button Click="btn_orders_Click"
+                x:Name="btn_orders"
+                FontSize="14"
+                Content="Заказы"
+                HorizontalAlignment="Left"
+                Margin="25,210,0,0"
+                VerticalAlignment="Top"
+                Width="115"
+                Height="35"
+                FontWeight="Bold" />
+        <Button Visibility="Hidden"
+                FontSize="13"
+                x:Name="btn_back"
+                Click="btn_back_Click"
+                Content="Назад"
+                HorizontalAlignment="Left"
+                Margin="25,434,0,0"
+                VerticalAlignment="Top"
+                Width="115"
+                Height="25"
+                FontWeight="Bold" />
+
+        <Frame ContentRendered="MainFrame_ContentRendered"
+               x:Name="MainFrame"
+               NavigationUIVisibility="Hidden"
+               Navigated="MainFrame_Navigated" />
+    </Grid>
+    
+</Window>

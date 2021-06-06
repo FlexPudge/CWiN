@@ -1,0 +1,87 @@
+﻿<Page x:Class="ServiceCenter.Views.AddPositionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ServiceCenter.Views"
+      mc:Ignorable="d"
+      Height="520"
+      Width="850"
+      Title="">
+
+    <Grid>
+
+        <Label Content="Назавние должности"
+               HorizontalAlignment="Center"
+               FontSize="16"
+               Margin="216,114,462,374"
+               VerticalAlignment="Center"
+               Width="172" />
+
+        <Label Content="Оклад"
+               FontSize="16"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Margin="322,156,464,334"
+               Width="64" />
+
+        <Label Content="Обязанности"
+               FontSize="16"
+               HorizontalAlignment="Center"
+               Margin="278,196,462,294"
+               VerticalAlignment="Center"
+               Width="110" />
+        <Label Content="Требования"
+               FontSize="16"
+               HorizontalAlignment="Center"
+               Margin="278,236,462,254"
+               VerticalAlignment="Center"
+               Width="110" />
+        <TextBox Text="{Binding PositionName }"
+                 x:Name="tb_PosName"
+                 FontSize="14"
+                 HorizontalAlignment="Left"
+                 Height="32"
+                 Margin="406,114,0,0"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top"
+                 Width="158" />
+        <TextBox Text="{Binding Salary }"
+                 x:Name="tb_salary"
+                 FontSize="14"
+                 HorizontalAlignment="Left"
+                 Height="32"
+                 Margin="406,152,0,0"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top"
+                 Width="158" />
+        <TextBox Text="{Binding Needs }"
+                 x:Name="tb_needs"
+                 FontSize="14"
+                 HorizontalAlignment="Left"
+                 Height="32"
+                 Margin="406,188,0,0"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top"
+                 Width="158" />
+        <TextBox Text="{Binding Requirements }"
+                 x:Name="tb_requirements"
+                 FontSize="14"
+                 HorizontalAlignment="Left"
+                 Height="32"
+                 Margin="406,226,0,0"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top"
+                 Width="158" />
+        <Button Content="Сохранить"
+                Name="btn_save"
+                Click="btn_save_Click"
+                FontSize="14"
+                HorizontalAlignment="Left"
+                Margin="406,270,0,0"
+                VerticalAlignment="Top"
+                Width="100"
+                Height="44"
+                FontWeight="Bold" />
+    </Grid>
+</Page>
